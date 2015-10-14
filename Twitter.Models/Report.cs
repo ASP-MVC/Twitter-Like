@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public class Report
     {
@@ -11,6 +12,7 @@
 
         public virtual Tweet Tweet { get; set; }
 
+        [Required]
         public string ReportedById { get; set; }
 
         public virtual ApplicationUser ReportedBy { get; set; }

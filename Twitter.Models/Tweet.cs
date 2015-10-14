@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public class Tweet
     {
@@ -23,8 +24,11 @@
 
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(300, MinimumLength = 2)]
         public string Content { get; set; }
 
+        [StringLength(255)]
         public string Page { get; set; }
         
         public DateTime TweetedAt { get; set; }

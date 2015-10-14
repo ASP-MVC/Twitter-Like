@@ -1,12 +1,16 @@
-﻿<div class="row">
+﻿@model Twitter.Web.Models.BindingModels.ReTweetBindingModel
+<div class="row">
     <div class="modal-body">
-        @using (Html.BeginForm("ReTweet", "Tweets", FormMethod.Post, new {@class ="form-group"}))
+        @using (Html.BeginForm("ReTweet", "Tweets", FormMethod.Post, new { @class = "form-group" }))
         {
-            @*@Html.AntiForgeryToken()*@
+            @Html.AntiForgeryToken()
+            @Html.EditorFor(m => m.Content)
 
-            @Html.Label("Retweet this to your followers?", new {@class="form-control"})
-            @Html.TextBox("content", "", new {@class="form-control", id="retweetContent"})
             <input type="submit" value="ReTweet" class="btn btn-default"/>
         }
     </div>
 </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

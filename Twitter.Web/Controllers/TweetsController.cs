@@ -1,17 +1,13 @@
 ﻿namespace Twitter.Web.Controllers
 {
     using System;
-    using System.Linq;
-    using System.Net;
     using System.Web.Mvc;
-    using System.Web.UI.HtmlControls;
 
     using Microsoft.AspNet.Identity;
 
     using Twitter.Data.UnitOfWork;
     using Twitter.Models;
     using Twitter.Web.Models.BindingModels;
-    using Twitter.Web.Models.ViewModels;
 
     public class TweetsController : BaseController
     {
@@ -22,20 +18,25 @@
 
         public ActionResult Reply()
         {
-            return null;
+            throw new NotImplementedException();
         }
         
         [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult ReTweet(ReTweetBindingModel model)
         {
-
-            return null;
+            if (model != null && this.ModelState.IsValid)
+            {
+                // Todo save retweet
+            }
+            return this.View("_ReTweetPartial", model);
         }
 
         [HttpGet]
-        public PartialViewResult ReTweet()
+        public ActionResult ReTweet()
         {
-            return this.PartialView("_ReTweetPartial");
+            return this.View("_ReTweetPartial");
         }
 
         public ActionResult Favourite(int id)
@@ -50,34 +51,35 @@
 
         public ActionResult Share()
         {
-            return null;
+            throw new NotImplementedException();
         }
 
-        public PartialViewResult CallAddTweetView()
+        [HttpGet]
+        public ActionResult Add()
         {
-            return this.PartialView("_AddTweetPartial");
+            return this.View("_AddTweetPartial");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddTweet(AddTweetBindingModel model)
+        public ActionResult Add(AddTweetBindingModel model)
         {
-            if (!this.ModelState.IsValid)
+            if (model != null && this.ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var currentUserId = this.User.Identity.GetUserId();
+                var tweet = new Tweet
+                {
+                    Content = model.Content,
+                    Page = model.PageUrl,
+                    TweetedAt = DateTime.Now,
+                    UserId = currentUserId
+                };
+                this.TwitterData.Tweets.Add(tweet);
+                this.TwitterData.SaveChanges();
+                return this.RedirectToAction("Home", "Users");
             }
 
-            var currentUserId = this.User.Identity.GetUserId();
-            var tweet = new Tweet
-                        {
-                            Content = model.Content,
-                            Page = model.PageUrl,
-                            TweetedAt = DateTime.Now,
-                            UserId = currentUserId
-                        };
-            this.TwitterData.Tweets.Add(tweet);
-            this.TwitterData.SaveChanges();
-            return this.RedirectToAction("Home", "Users");
+            return this.View("_AddTweetPartial", model);
         }
     }
 }

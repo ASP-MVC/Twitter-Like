@@ -8,7 +8,7 @@
 </h2>
 
 <div>
-    @Ajax.ActionLink("Tweet", "CallAddTweetView", "Tweets", null,
+    @Ajax.ActionLink("Tweet", "Add", "Tweets", null,
     new AjaxOptions
     {
         UpdateTargetId = "addTweetContainer", InsertionMode = InsertionMode.Replace, OnComplete = "OnAjaxRequestCompleteShowAdd"

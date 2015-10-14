@@ -1,15 +1,17 @@
 ﻿@model Twitter.Web.Models.BindingModels.AddTweetBindingModel
 <div class="row">
     <div class="modal-body">
-        @using (Html.BeginForm("AddTweet", "Tweets", FormMethod.Post, new { @class = "form-group" }))
+        @using (Html.BeginForm("Add", "Tweets", FormMethod.Post, new { @class = "form-group" }))
         {
             @Html.AntiForgeryToken()
 
-            @Html.LabelFor(m => m.Content, new {@class="form-control"})
-            @Html.EditorFor(m => m.Content, new { @class = "form-control" })
-            @Html.LabelFor(m => m.PageUrl, new { @class = "form-control" })
-            @Html.EditorFor(m => m.PageUrl, new { @class = "form-control" })
-            <input type="submit" value="Tweet" class="btn btn-default" />
+            @Html.EditorFor(m => m.Content)
+            @Html.EditorFor(m => m.PageUrl)
+            <input type="submit" value="Tweet" class="btn btn-primary" />
         }
     </div>
 </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -311,10 +311,13 @@
     <Content Include="Views\Notifications\GetAllNotifications.cshtml" />
     <Content Include="Views\Notifications\GeFollowingUsersNotifications.cshtml" />
     <Content Include="Views\Shared\_NotificationPartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MultiLineText.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SingleLineText.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\ViewModels\Tweet\ReplyTweet\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -34,3 +34,8 @@ textarea {
 .custom-profile-image {
     max-width: 50%;
 }
+
+.field-validation-error {
+    font-weight: 900;
+    color: red;
+}
