@@ -1,0 +1,17 @@
+﻿@model Twitter.Web.Models.ViewModels.Notification.NotificationViewModel
+<div class="col-md-10 modal-body">
+    <div class="col-md-1">
+        @if (@Model.NotifierProfileImage != null)
+        {
+            <img src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(@Model.NotifierProfileImage))" alt="@Model.NotifierUsername" class="img-responsive img-thumbnail"/>
+        }
+        else
+        {
+            <span class="glyphicon glyphicon-picture"></span>
+        }
+    </div>
+    <a href="#" class="glyphicon glyphicon-user">@Model.NotifierUsername</a>
+    <span> has </span>
+    <span>@Model.NotificationType.ToString()</span>
+</div>
+<div class="col-md-2">@Model.DateTime</div>

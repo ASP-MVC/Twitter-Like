@@ -1,0 +1,48 @@
+﻿@model PagedList.IPagedList<Twitter.Web.Models.ViewModels.TweetViewModel>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Twitter-Like App</h1>
+    <p class="lead">Using ASP.NET, JavaScript, CSS</p>
+</div>
+
+<div class="row">
+    @foreach (var tweet in @Model)
+    {
+        <div class="col-md-6">
+            <div class="thumbnail">
+                <div class="caption">
+                    <div>
+                        @if (@tweet.UserProfilePicture != null)
+                        {
+                            <div class="col-md-3"><img src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(@tweet.UserProfilePicture))" class="img-responsive img-thumbnail custom-profile-image"/>
+                            </div>
+                        }
+                        <strong>@tweet.UserName</strong>
+                    </div>
+                    <br/>
+                    <strong>@tweet.TweetedAt</strong>
+                    <div class="alert alert-info"><p>@tweet.Content</p></div>
+                    <a class="badge" href="@Url.Action("Favourite", "Tweets", new {id = tweet.Id})">
+                        <span class="glyphicon glyphicon-star"></span><span>@tweet.FavouritesCount</span>
+                    </a>
+                    @Ajax.ActionLink(" ", "ReTweet", "Tweets", null, new AjaxOptions { UpdateTargetId = "retweetContainer", HttpMethod = "GET", InsertionMode = InsertionMode.Replace, OnComplete = "OnAjaxRequestCompleteShowRetweet" }, new { @class = "glyphicon glyphicon-retweet badge", id = "retweetBtn" })
+                    <a class="badge" href="@Url.Action("Reply", "Tweets")"><span class="glyphicon glyphicon-share-alt"></span></a>
+                    <a class="badge" href="@Url.Action("Share", "Tweets")"><span class="glyphicon glyphicon-share"></span></a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="text-center">
+    <p class="pager">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+
+@*@section scripts{
+    @Scripts.Render("~/bundles/customScripts")
+}*@

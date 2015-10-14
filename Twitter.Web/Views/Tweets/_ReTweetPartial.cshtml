@@ -1,0 +1,12 @@
+﻿<div class="row">
+    <div class="modal-body">
+        @using (Html.BeginForm("ReTweet", "Tweets", FormMethod.Post, new {@class ="form-group"}))
+        {
+            @*@Html.AntiForgeryToken()*@
+
+            @Html.Label("Retweet this to your followers?", new {@class="form-control"})
+            @Html.TextBox("content", "", new {@class="form-control", id="retweetContent"})
+            <input type="submit" value="ReTweet" class="btn btn-default"/>
+        }
+    </div>
+</div>

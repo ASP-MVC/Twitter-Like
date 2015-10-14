@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Twitter.Web.Models.ViewModels.Notification.NotificationViewModel>
+@{
+    ViewBag.Title = "Notifications";
+}
+
+<h2>People you follow</h2>
+<div class="row">
+    <ul class="nav-tabs">
+        <li class="navbar-brand">
+            @Html.ActionLink("All", "GetAllNotifications")
+            <span>/</span>
+            @Html.ActionLink("People you know", "GeFollowingUsersNotifications")
+
+
+        </li>
+    </ul>
+</div>
+<div class="row">
+    @foreach (var notification in @Model)
+    {
+        @Html.Partial("_NotificationPartial", notification)
+    }
+</div>

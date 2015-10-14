@@ -1,0 +1,42 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Twitter.Web.Models.ViewModels.User.UserViewModel>
+@{
+    ViewBag.Title = "FollowedUsersTweets";
+}
+
+<div class="row">
+    <h2>Tweets</h2>
+    @foreach (var followedUser in @Model)
+    {
+        <div class="col-md-6">
+            <div class="thumbnail">
+
+                <h3>@followedUser.UserName</h3>
+                @foreach (var tweet in followedUser.UserTweets)
+                {
+                    <div class="caption">
+                        <strong>@tweet.TweetedAt</strong>
+                        <div class="alert alert-info">
+                            <p>@tweet.Content</p>
+                        </div>
+                        <a class="badge" href="@Url.Action("Favourite", "Tweets")">
+                            <span class="glyphicon glyphicon-star"></span><span>@tweet.FavouritesCount</span>
+                        </a>
+                       @Ajax.ActionLink(" ", "ReTweet", "Tweets", null, new AjaxOptions { UpdateTargetId = "retweetContainer", HttpMethod = "GET", InsertionMode = InsertionMode.Replace, OnComplete = "OnAjaxRequestCompleteShowRetweet" }, new { @class = "glyphicon glyphicon-retweet badge", id = "retweetBtn" })
+                        <a class="badge" href="@Url.Action("Reply", "Tweets")"><span class="glyphicon glyphicon-share-alt"></span></a>
+                        <a class="badge" href="@Url.Action("Share", "Tweets")"><span class="glyphicon glyphicon-share"></span></a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+    @Html.PagedListPager(Model, page => Url.Action("FollowedUsersTweets", new { page }))
+</div>
+
+@*@section scripts{
+    @Scripts.Render("~/bundles/customScripts")
+}*@

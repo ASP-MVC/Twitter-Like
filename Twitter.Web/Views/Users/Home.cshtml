@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>
+    <span class="glyphicon glyphicon-home"></span> Home
+</h2>
+
+<div>
+    @Ajax.ActionLink("Tweet", "CallAddTweetView", "Tweets", null,
+    new AjaxOptions
+    {
+        UpdateTargetId = "addTweetContainer", InsertionMode = InsertionMode.Replace, OnComplete = "OnAjaxRequestCompleteShowAdd"
+    },
+    new { @class = "btn btn-info", id= "addTweetBtn" })
+</div>
+@{
+    Html.RenderAction("FollowedUsersTweets");
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/customScripts")
+}
