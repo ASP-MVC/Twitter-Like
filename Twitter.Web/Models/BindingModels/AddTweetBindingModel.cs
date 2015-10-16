@@ -9,7 +9,7 @@
         [UIHint("SingleLineText")]
         public string Content { get; set; }
 
-        [Required]
+        [StringLength(255)]
         [UIHint("SingleLineText")]
         public string PageUrl { get; set; }
     }

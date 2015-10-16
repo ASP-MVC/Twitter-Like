@@ -5,6 +5,7 @@
         {
             @Html.AntiForgeryToken()
             @Html.EditorFor(m => m.Content)
+            @Html.HiddenFor(m => m.TweetId, new {id = @Model.TweetId })
 
             <input type="submit" value="ReTweet" class="btn btn-default"/>
         }

@@ -28,15 +28,20 @@
         {
             if (model != null && this.ModelState.IsValid)
             {
-                // Todo save retweet
+                var tweet = this.TwitterData.Tweets.Find(model.TweetId);
+                tweet.Retweets.Add(new Tweet {Content = model.Content, TweetedAt = DateTime.Now});
+                this.TwitterData.SaveChanges();
+                return this.RedirectToAction("Home", "Users");
             }
             return this.View("_ReTweetPartial", model);
         }
 
         [HttpGet]
-        public ActionResult ReTweet()
+        public ActionResult ReTweet(int id)
         {
-            return this.View("_ReTweetPartial");
+            var bindingModel = new ReTweetBindingModel();
+            bindingModel.TweetId = id;
+            return this.View("_ReTweetPartial", bindingModel);
         }
 
         public ActionResult Favourite(int id)

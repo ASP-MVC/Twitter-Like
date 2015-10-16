@@ -20,6 +20,7 @@
         public ActionResult GetAllNotifications()
         {
             var currentUserId = this.User.Identity.GetUserId();
+            var test = this.UserProfile.Id;
             var allNotifications = 
                 this.TwitterData.Notifications.All()
                 .Where(n => n.ApplicationUserId == currentUserId || n.ApplicationUser.FollowedBy.Any(u => u.Id == currentUserId))
