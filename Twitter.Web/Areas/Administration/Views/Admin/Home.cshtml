@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Hello, Admin!</h2>
+
+<div id="allUsers"></div><span class="close" id="closeGetUsersWindow">Close</span>
+
+@Ajax.ActionLink("Show me App's users", "GetAllUsers", null,
+    new AjaxOptions()
+    {
+        UpdateTargetId = "allUsers",
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        OnComplete = "ShowUsersContainer"
+
+    }, new { @class = "btn btn-danger"})

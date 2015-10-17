@@ -26,7 +26,7 @@
         {
             this.UserProfile =
                 this.TwitterData.ApplicationUsers.All()
-                    .FirstOrDefault(u => u.UserName == requestContext.HttpContext.User.Identity.Name);
+                .FirstOrDefault(u => u.UserName == requestContext.HttpContext.User.Identity.Name);
 
             return base.BeginExecute(requestContext, callback, state);
         }

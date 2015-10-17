@@ -18,7 +18,19 @@
             }
         }
     });
+
+   
 });
+
+$("#closeGetUsersWindow").click( function () {
+    $("#allUsers").toggle();
+    $("#closeGetUsersWindow").toggle();
+});
+
+function ShowUsersContainer() {
+    $("#allUsers").show();
+    $("#closeGetUsersWindow").show();
+}
 
 function OnAjaxRequestCompleteShowRetweet() {
     $("#retweetContainer").show();

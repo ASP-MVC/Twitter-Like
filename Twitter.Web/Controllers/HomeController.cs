@@ -17,12 +17,10 @@
         {
         }
 
+        // GET Home/Index
+        [HttpGet]
         public ActionResult Index(int? page)
         {
-            //if (Request.IsAuthenticated)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
             var pageNumber = (page ?? 1);
             var allTweets =
                 this.TwitterData.Tweets.All()

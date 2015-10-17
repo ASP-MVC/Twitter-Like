@@ -17,6 +17,7 @@
     using Twitter.Web.Models.ViewModels.User;
 
     [RoutePrefix("users")]
+    [Authorize]
     public class UsersController : BaseController
     {
         public UsersController(ITwitterData data)
@@ -30,7 +31,6 @@
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult FollowedUsersTweets(int? page)
         {
             var currentUserId = this.User.Identity.GetUserId();
@@ -42,13 +42,14 @@
 
             var followeedUsers = 
                 user.FollowedUsers
-                .AsQueryable().Project().To<UserViewModel>();
+                .AsQueryable()
+                .Project()
+                .To<UserViewModel>();
 
             var pageNumber = (page ?? 1);
             return this.View(followeedUsers.ToPagedList(pageNumber, PageSize));
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult MyProfile()
         {
@@ -57,7 +58,6 @@
             return this.View(userProfile);
         }
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChangePicture(HttpPostedFileBase file)
@@ -70,7 +70,7 @@
                 currentUser.ProfilePictureUrl = array;
                 this.TwitterData.SaveChanges();
             }
-            return null;
+            return this.RedirectToAction("MyProfile", "Users");
         }
     }
 }

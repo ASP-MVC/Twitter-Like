@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Twitter.Web.Areas.Administration.Models.ViewModels.AllUsersViewModel>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Twitter-Like application users</div>
+    <div class="panel-body"></div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>E-mail</th>
+            <th>User's tweets count</th>
+            <th>User's reports count</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var user in @Model)
+        {
+            <tr>
+                <td>#</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.UserTweetsCount</td>
+                <td>@user.UserReportsCount</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -20,12 +20,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li>@Html.ActionLink("Home", "Home", "Users")</li>
-                    <li>@Html.ActionLink("Profile", "MyProfile", "Users")</li>
-                    <li>@Html.ActionLink("Notifications", "GetAllNotifications", "Notifications")</li>
-                }
+                @Html.Partial("_NavigationPartial")
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

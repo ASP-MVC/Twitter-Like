@@ -11,6 +11,8 @@
 
     public class ApplicationUser : IdentityUser
     {
+        private const bool IsUserAccountActive = true;
+
         private ICollection<ApplicationUser> followedBy;
 
         private ICollection<Tweet> tweets;
@@ -40,20 +42,11 @@
             
             //Defaults
             this.Joined = DateTime.Now;
+            this.IsActive = IsUserAccountActive;
         }
 
-        public virtual ICollection<Notification> Notifications
-        {
-            get
-            {
-                return this.notifications;
-            }
-            set
-            {
-                this.notifications = value;
-            }
-        }
-
+        public bool IsActive { get; set; }
+        
         [StringLength(100)]
         public string JobTitle { get; set; }
 
@@ -144,6 +137,18 @@
             set
             {
                 this.myReports = value;
+            }
+        }
+
+        public virtual ICollection<Notification> Notifications
+        {
+            get
+            {
+                return this.notifications;
+            }
+            set
+            {
+                this.notifications = value;
             }
         }
 

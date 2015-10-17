@@ -10,6 +10,7 @@
     using Twitter.Models;
     using Twitter.Web.Models.BindingModels;
 
+    [Authorize]
     public class TweetsController : BaseController
     {
         public TweetsController(ITwitterData data)
@@ -23,7 +24,6 @@
         }
 
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult ReTweet(ReTweetBindingModel model)
         {
