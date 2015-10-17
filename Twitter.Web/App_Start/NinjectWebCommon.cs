@@ -1,5 +1,9 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Twitter.Web.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Twitter.Web.App_Start.NinjectWebCommon), "Stop")]
+using Twitter.Web.App_Start;
+
+using WebActivatorEx;
+
+[assembly: PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
 
 namespace Twitter.Web.App_Start
 {
@@ -16,30 +20,30 @@ namespace Twitter.Web.App_Start
     using Twitter.Data.Interfaces;
     using Twitter.Data.UnitOfWork;
 
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
-        /// Starts the application
+        ///     Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
-        /// Stops the application.
+        ///     Stops the application.
         /// </summary>
         public static void Stop()
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
-        /// Creates the kernel that will manage your application.
+        ///     Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
@@ -61,7 +65,7 @@ namespace Twitter.Web.App_Start
         }
 
         /// <summary>
-        /// Load your modules or register your services here!
+        ///     Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
@@ -69,6 +73,6 @@ namespace Twitter.Web.App_Start
             kernel.Bind<DbContext>().To<TwitterDbContext>();
             kernel.Bind<ITwitterDbContext>().To<TwitterDbContext>();
             kernel.Bind<ITwitterData>().To<TwitterData>().WithConstructorArgument("context", new TwitterDbContext());
-        }        
+        }
     }
 }

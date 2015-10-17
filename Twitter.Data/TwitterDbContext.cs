@@ -1,19 +1,17 @@
 namespace Twitter.Data
 {
-    using System;
     using System.Data.Entity;
-    using System.Linq;
+    using System.Data.Entity.ModelConfiguration.Conventions;
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using Twitter.Data.Interfaces;
-    using Twitter.Data.Migrations;
     using Twitter.Models;
 
     public class TwitterDbContext : IdentityDbContext<ApplicationUser>, ITwitterDbContext
     {
         public TwitterDbContext()
-            : base("TwitterDbContext", throwIfV1Schema: false)
+            : base("TwitterDbContext")
         {
         }
 
@@ -32,6 +30,8 @@ namespace Twitter.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
             modelBuilder.Entity<Message>().HasOptional(m => m.Sender).WithMany(m => m.SendMessages).WillCascadeOnDelete(false);
             modelBuilder.Entity<Message>().HasOptional(x => x.Recipient).WithMany(x => x.RecievedMessages).WillCascadeOnDelete(false);
 

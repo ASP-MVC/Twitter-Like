@@ -2,7 +2,7 @@
 <div class="jumbotron">
     <div class="row modal-content">
         <div class="col-md-3 modal-header">
-            <img src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(@Model.UserProfilePicture))" class="img-responsive img-thumbnail custom-profile-image" /> 
+            <img src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(@Model.UserProfilePicture))" class="img-responsive img-thumbnail custom-profile-image"/>
             @Model.UserName
         </div>
         <div class="col-md-3 modal-header">@Model.UserEmail</div>
@@ -18,10 +18,12 @@
                 @Ajax.ActionLink(" ", "ReTweet", "Tweets", null, new AjaxOptions { UpdateTargetId = "retweetContainer", HttpMethod = "GET", InsertionMode = InsertionMode.Replace, OnComplete = "OnAjaxRequestCompleteShowRetweet" }, new { @class = "glyphicon glyphicon-retweet badge", id = "retweetBtn" })
             </div>
             <div class="col-md-1">
-                <a class="badge" href="@Url.Action("Reply", "Tweets")"><span class="glyphicon glyphicon-share-alt"></span></a>
+                <a class="badge" href="@Url.Action("Reply", "Tweets")">
+                    <span class="glyphicon glyphicon-share-alt"></span></a>
             </div>
             <div class="col-md-1">
-                <a class="badge" href="@Url.Action("Share", "Tweets")"><span class="glyphicon glyphicon-share"></span></a>
+                <a class="badge" href="@Url.Action("Share", "Tweets")">
+                    <span class="glyphicon glyphicon-share"></span></a>
             </div>
         </div>
     </div>

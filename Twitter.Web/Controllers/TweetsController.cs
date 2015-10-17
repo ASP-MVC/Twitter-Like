@@ -5,6 +5,7 @@
 
     using Microsoft.AspNet.Identity;
 
+    using Twitter.Common;
     using Twitter.Data.UnitOfWork;
     using Twitter.Models;
     using Twitter.Web.Models.BindingModels;
@@ -20,7 +21,7 @@
         {
             throw new NotImplementedException();
         }
-        
+
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -29,18 +30,19 @@
             if (model != null && this.ModelState.IsValid)
             {
                 var tweet = this.TwitterData.Tweets.Find(model.TweetId);
-                tweet.Retweets.Add(new Tweet {Content = model.Content, TweetedAt = DateTime.Now});
+                tweet.Retweets.Add(new Tweet { Content = model.Content, TweetedAt = DateTime.Now });
                 this.TwitterData.SaveChanges();
+                this.TempData[GlobalConstants.TempMessageKey] = "You have successfully retweeted!";
                 return this.RedirectToAction("Home", "Users");
             }
+            this.TempData[GlobalConstants.TempMessageKey] = "Error during retweet";
             return this.View("_ReTweetPartial", model);
         }
 
         [HttpGet]
         public ActionResult ReTweet(int id)
         {
-            var bindingModel = new ReTweetBindingModel();
-            bindingModel.TweetId = id;
+            var bindingModel = new ReTweetBindingModel { TweetId = id };
             return this.View("_ReTweetPartial", bindingModel);
         }
 
@@ -73,17 +75,18 @@
             {
                 var currentUserId = this.User.Identity.GetUserId();
                 var tweet = new Tweet
-                {
-                    Content = model.Content,
-                    Page = model.PageUrl,
-                    TweetedAt = DateTime.Now,
-                    UserId = currentUserId
-                };
+                            {
+                                Content = model.Content,
+                                Page = model.PageUrl,
+                                TweetedAt = DateTime.Now,
+                                UserId = currentUserId
+                            };
                 this.TwitterData.Tweets.Add(tweet);
                 this.TwitterData.SaveChanges();
+                this.TempData[GlobalConstants.TempMessageKey] = "You have successfully added your tweet!";
                 return this.RedirectToAction("Home", "Users");
             }
-
+            this.TempData[GlobalConstants.TempMessageKey] = "Error during add tweet";
             return this.View("_AddTweetPartial", model);
         }
     }

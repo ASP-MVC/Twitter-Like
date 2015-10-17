@@ -15,7 +15,7 @@
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TwitterDbContext, Configuration>());
             AutoMapperConfig.Execute();
-            
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

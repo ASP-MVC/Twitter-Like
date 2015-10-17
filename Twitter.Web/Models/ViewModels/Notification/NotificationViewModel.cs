@@ -16,7 +16,7 @@
         public DateTime DateTime { get; set; }
 
         public NotificationType NotificationType { get; set; }
-        
+
         public string NotifierUsername { get; set; }
 
         public string NotifierEmail { get; set; }

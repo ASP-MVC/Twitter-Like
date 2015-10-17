@@ -21,11 +21,14 @@
         {
             var currentUserId = this.User.Identity.GetUserId();
             var test = this.UserProfile.Id;
-            var allNotifications = 
+            var allNotifications =
                 this.TwitterData.Notifications.All()
-                .Where(n => n.ApplicationUserId == currentUserId || n.ApplicationUser.FollowedBy.Any(u => u.Id == currentUserId))
-                .Project()
-                .To<NotificationViewModel>();
+                    .Where(
+                        n =>
+                        n.ApplicationUserId == currentUserId
+                        || n.ApplicationUser.FollowedBy.Any(u => u.Id == currentUserId))
+                    .Project()
+                    .To<NotificationViewModel>();
 
             return this.View(allNotifications);
         }
@@ -34,11 +37,11 @@
         {
             var currentUserId = this.User.Identity.GetUserId();
             var user = this.TwitterData.ApplicationUsers.Find(currentUserId);
-            var followedUsersNotifications = 
+            var followedUsersNotifications =
                 this.TwitterData.Notifications.All()
-                 .Where(n => n.ApplicationUser.FollowedBy.Any(u => u.Id == currentUserId))
-                 .Project()
-                 .To<NotificationViewModel>();
+                    .Where(n => n.ApplicationUser.FollowedBy.Any(u => u.Id == currentUserId))
+                    .Project()
+                    .To<NotificationViewModel>();
 
             return this.View(followedUsersNotifications);
         }

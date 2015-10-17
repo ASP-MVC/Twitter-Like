@@ -328,6 +328,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Twitter.Common\Twitter.Common.csproj">
+      <Project>{CDB41634-ACA7-48C1-88F5-AD975A13D8EF}</Project>
+      <Name>Twitter.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Twitter.Data\Twitter.Data.csproj">
       <Project>{AD63D447-FAC6-44F5-9C2B-0BC313D0FE01}</Project>
       <Name>Twitter.Data</Name>

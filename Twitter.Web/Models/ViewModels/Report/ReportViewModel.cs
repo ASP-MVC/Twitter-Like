@@ -12,7 +12,7 @@
         public int Id { get; set; }
 
         public int TweetId { get; set; }
-        
+
         public string ReportedById { get; set; }
 
         public string ReportedByUsername { get; set; }

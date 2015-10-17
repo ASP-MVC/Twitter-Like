@@ -20,7 +20,7 @@
 
         public IEnumerable<TweetViewModel> UserTweets { get; set; }
 
-        public IEnumerable<ReportViewModel> UserReports { get; set; } 
+        public IEnumerable<ReportViewModel> UserReports { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

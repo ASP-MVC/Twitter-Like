@@ -1,19 +1,14 @@
-﻿
+﻿@using Twitter.Common
 @{
     ViewBag.Title = "Home";
 }
-
+<h1>@TempData[GlobalConstants.TempMessageKey]</h1>
 <h2>
     <span class="glyphicon glyphicon-home"></span> Home
 </h2>
 
 <div>
-    @Ajax.ActionLink("Tweet", "Add", "Tweets", null,
-    new AjaxOptions
-    {
-        UpdateTargetId = "addTweetContainer", InsertionMode = InsertionMode.Replace, OnComplete = "OnAjaxRequestCompleteShowAdd"
-    },
-    new { @class = "btn btn-info", id= "addTweetBtn" })
+    @Ajax.ActionLink("Tweet", "Add", "Tweets", null, new AjaxOptions { UpdateTargetId = "addTweetContainer", InsertionMode = InsertionMode.Replace, OnComplete = "OnAjaxRequestCompleteShowAdd" }, new { @class = "btn btn-info", id = "addTweetBtn" })
 </div>
 @{
     Html.RenderAction("FollowedUsersTweets");

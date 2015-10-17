@@ -1,7 +1,6 @@
 ﻿namespace Twitter.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web;
@@ -15,7 +14,6 @@
     using PagedList;
 
     using Twitter.Data.UnitOfWork;
-    using Twitter.Web.Models.BindingModels;
     using Twitter.Web.Models.ViewModels.User;
 
     [RoutePrefix("users")]
@@ -42,14 +40,11 @@
                 throw new ArgumentNullException();
             }
 
-            var followeedUsers =
-                 user.FollowedUsers
-                 .AsQueryable()
-                 .Project()
-                 .To<UserViewModel>()
-                 .ToList();
+            var followeedUsers = 
+                user.FollowedUsers
+                .AsQueryable().Project().To<UserViewModel>();
 
-            int pageNumber = (page ?? 1);
+            var pageNumber = (page ?? 1);
             return this.View(followeedUsers.ToPagedList(pageNumber, PageSize));
         }
 
@@ -71,7 +66,7 @@
             using (var memory = new MemoryStream())
             {
                 file.InputStream.CopyTo(memory);
-                byte[] array = memory.GetBuffer();
+                var array = memory.GetBuffer();
                 currentUser.ProfilePictureUrl = array;
                 this.TwitterData.SaveChanges();
             }

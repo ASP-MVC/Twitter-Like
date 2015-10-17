@@ -23,14 +23,14 @@
             //{
             //    return RedirectToAction("Index", "Home");
             //}
+            var pageNumber = (page ?? 1);
             var allTweets =
                 this.TwitterData.Tweets.All()
                     .OrderByDescending(t => t.TweetedAt)
                     .ThenBy(t => t.Id)
                     .Project()
-                    .To<TweetViewModel>()
-                    .ToList();
-            int pageNumber = (page ?? 1);
+                    .To<TweetViewModel>();
+            
 
             return this.View(allTweets.ToPagedList(pageNumber, PageSize));
         }

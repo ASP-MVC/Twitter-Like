@@ -1,11 +1,13 @@
-﻿@model Twitter.Web.Models.BindingModels.ReTweetBindingModel
+﻿@using Twitter.Common
+@model Twitter.Web.Models.BindingModels.ReTweetBindingModel
+<h1>@TempData[GlobalConstants.TempMessageKey]</h1>
 <div class="row">
     <div class="modal-body">
         @using (Html.BeginForm("ReTweet", "Tweets", FormMethod.Post, new { @class = "form-group" }))
         {
             @Html.AntiForgeryToken()
             @Html.EditorFor(m => m.Content)
-            @Html.HiddenFor(m => m.TweetId, new {id = @Model.TweetId })
+            @Html.HiddenFor(m => m.TweetId, new { id = @Model.TweetId })
 
             <input type="submit" value="ReTweet" class="btn btn-default"/>
         }

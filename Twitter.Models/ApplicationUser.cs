@@ -37,6 +37,9 @@
             this.myReports = new HashSet<Report>();
             this.userFavouriteTweets = new HashSet<TweetLike>();
             this.notifications = new HashSet<Notification>();
+            
+            //Defaults
+            this.Joined = DateTime.Now;
         }
 
         public virtual ICollection<Notification> Notifications

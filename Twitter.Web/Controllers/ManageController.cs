@@ -72,15 +72,15 @@
 
             var userId = this.User.Identity.GetUserId();
             var model = new IndexViewModel
-            {
-                HasPassword = this.HasPassword(),
-                PhoneNumber = await this.UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await this.UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await this.UserManager.GetLoginsAsync(userId),
-                BrowserRemembered =
+                        {
+                            HasPassword = this.HasPassword(),
+                            PhoneNumber = await this.UserManager.GetPhoneNumberAsync(userId),
+                            TwoFactor = await this.UserManager.GetTwoFactorEnabledAsync(userId),
+                            Logins = await this.UserManager.GetLoginsAsync(userId),
+                            BrowserRemembered =
                                 await
                                 this.AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
+                        };
             return this.View(model);
         }
 
@@ -135,10 +135,10 @@
             if (this.UserManager.SmsService != null)
             {
                 var message = new IdentityMessage
-                {
-                    Destination = model.Number,
-                    Body = "Your security code is: " + code
-                };
+                              {
+                                  Destination = model.Number,
+                                  Body = "Your security code is: " + code
+                              };
                 await this.UserManager.SmsService.SendAsync(message);
             }
             return this.RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
@@ -403,11 +403,17 @@
         public enum ManageMessageId
         {
             AddPhoneSuccess,
+
             ChangePasswordSuccess,
+
             SetTwoFactorSuccess,
+
             SetPasswordSuccess,
+
             RemoveLoginSuccess,
+
             RemovePhoneSuccess,
+
             Error
         }
 
