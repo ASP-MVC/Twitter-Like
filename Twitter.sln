@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter.Web", "Twitter.Web\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{EAE05EDF-D14C-4DDB-96DF-F26F7C1BA4CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter.Common", "Twitter.Common\Twitter.Common.csproj", "{CDB41634-ACA7-48C1-88F5-AD975A13D8EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter.Common", "..\KendoTwitter\Twitter\Twitter.Common\Twitter.Common.csproj", "{CDB41634-ACA7-48C1-88F5-AD975A13D8EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
