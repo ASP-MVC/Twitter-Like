@@ -73,8 +73,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\KendoTwitter\Twitter\Twitter.Common\Twitter.Common.csproj">
-      <Project>{cdb41634-aca7-48c1-88f5-ad975a13d8ef}</Project>
+    <ProjectReference Include="..\Twitter.Common\Twitter.Common.csproj">
+      <Project>{398b1f2e-9eaf-448a-9e6b-d15e2351225b}</Project>
       <Name>Twitter.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Twitter.Models\Twitter.Models.csproj">
